@@ -1,0 +1,76 @@
+= dom.js
+
+A collection of DOM wrapper routines to simplify DOM manipulation. The routines are in a `DOM` object to limit the effect on the global name space.
+
+A description of the routines follows:
+
+## Select Elements
+
+`DOM.select(selector)`::
+Select a single Element. This is just a wrapper for `document.querySelector()`
+
+`DOM.selectAll(selector,nodeList=false)`::
+Select a single Element. This is just a wrapper for `document.querySelector()`
++
+By default, the result is an *Array* of elements. The optional second parameter allows you to prefer a *nodeList*.
+
+## Create Elements
+
+`DOM.element(html)`::
+Create Element from HTML
+`DOM.elements(html,nodeList=false)`::
+Create Elements from HTML as array or nodeList
++
+By default, the result is an *Array* of elements. The optional second parameter allows you to prefer a *nodeList*.
+
+## Insert Elements
+
+There are eight routines which will place an element somewhere in the DOM. Four of them will place Element objects (such as those created or selected above), while four of them will place an element generated from an HTML string.
+
+There are four positions to insert your new element. `insertBefore` and `insertAfter` place the element _outside_, immediately before after  the original element. `prepend` and `append` place the new element _inside_, at the beginning or the end of the content of the original element.
+
+[[img-insert]]
+.Insert Element Positions
+image::insert.svg[Insert Elements,320,240]
+
+### Insert Existing Element
+
+`DOM.insertBefore(newElement,element)`::
+Insert newElement before element
+`DOM.prepend(newElement,element)`::
+Insert newElement inside element at beginning
+`DOM.append(newElement,element)`::
+Insert newElement inside element at end
+`DOM.insertAfter(newElement,element)`::
+Insert newElement after element
+
+### Insert Element from HTML
+
+
+The following create an element from an html string. Otherwise they do the same as above.
+
+`DOM.insertHTMLBefore(html,element)`::
+Insert newElement before element
+`DOM.prependHTML(html,element)`::
+Insert newElement inside element at beginning
+`DOM.appendHTML(html,element)`::
+Insert newElement inside element at end
+`DOM.insertHTMLAfter(html,element)`::
+Insert newElement after element
+
+## Toggle Attrbute
+
+This will toggle an element’s attribute by adding or removing it. Optionally, you can set the value of the attribute to something other than `true`.
+
+`DOM.toggleAttribute(element,attribute,value=true)`::
+Toggle an element’s attribute. It’s devault value, if set, is `true`.
+
+## Coming Up
+
+- Ajax Routines
+
+## E&OE
+
+This code does what it does and doesn’t do what it doesn’t do.
+
+Share & Enjoy …
