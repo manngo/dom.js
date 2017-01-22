@@ -31,7 +31,7 @@ There are four positions to insert your new element. `insertBefore` and `insertA
 
 [[img-insert]]
 .Insert Element Positions
-image::insert.svg[Insert Elements,320,240]
+image::insert.png[Insert Element]
 
 ### Insert Existing Element
 
