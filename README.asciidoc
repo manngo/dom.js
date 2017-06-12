@@ -29,6 +29,7 @@ A description of the routines follows.
 
 2+| *Toggle Attrbute*
 | `DOM.toggleAttribute(element,attribute[,value])`	| Toggle an element’s attribute.
+| `DOM.radio(elements,attribute[,allOff])`			| Add a `click` listener to toggle then elements’ attribute.
 
 2+| *Wrapping*
 | `DOM.wrap(element,wrapper)`			| Wraps a single element inside a designated wrapper element.
@@ -107,6 +108,10 @@ This will toggle an element’s attribute by adding or removing it. Optionally, 
 `DOM.toggleAttribute(element,attribute,value=true)`::
 Toggle an element’s attribute. Its default value, if set, is `true`.
 
+`DOM.radio(elements,attribute,allOff=false)`::
+Adds an `onclick` listener to all of the elements to set the attribute of only a single element.
++
+If the `allOff` parameter is `true`, selecting a selected element will remove the attribute.
 ##	Wrapping
 
 There are 3 routines which wrap or unwrap Elements.
@@ -152,6 +157,14 @@ Makes an Ajax call to `url`, with an optional query string, and loads the result
 
 `DOM.loadText(element,url[,query]])`::
 Makes an Ajax call to `url`, with an optional query string, and loads the result into the `element`; the result is interpreted as *text*.
+
+##	Event Listeners
+
+`DOM.listen(element,listener,fn,capture)`::
+`DOM.listenAll(elements,listener,fn,capture)`::
+Adds an event listener function an element or a collection of elements.
++
+The `fn` parameter is the event listener function, and is required. The `capture` parameter is optional.
 
 
 ##	Others
