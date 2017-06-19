@@ -42,6 +42,12 @@ A description of the routines follows.
 | `DOM.loadHTML(element,url[,query]])`	| Makes an Ajax call to `url`, with an optional query string, and loads the result into the `element`; the result is interpreted as *HTML*.
 | `DOM.loadText(element,url[,query]])`	| Makes an Ajax call to `url`, with an optional query string, and loads the result into the `element`; the result is interpreted as *text*.
 
+2+| *Siblings*
+| `DOM.previousSibling(element)`		| Find Previous Sibling, skipping white space.
+| `DOM.nextSibling(element)`			| Find Next Sibling, skipping white space.
+| `DOM.firstChild(element)`				| Find First Child, skipping white space.
+| `DOM.lastChild(element)`				| Find Last Child, skipping white space.
+
 2+| *Others*
 | `DOM.scrollPosition()`							| Gets the current scroll position of the window as an object: `{left,top}`.
 | `DOM.boundingRect(element[,documentRelative])`	| Gets box information about the element as an object.
@@ -166,6 +172,19 @@ Adds an event listener function an element or a collection of elements.
 +
 The `fn` parameter is the event listener function, and is required. The `capture` parameter is optional.
 
+##	Siblings
+
+Some Browsers, notably Mozilla, include white spaces between elements in the DOM tree. This is a set of functions which will skip these white space nodes.
+
+You can safely use then for all browsers.
+
+`DOM.previousSibling(element)`::
+`DOM.nextSibling(element)`::
+Find Previous or Next Sibling, skipping white space.
+
+`DOM.firstChild(element)`::
+`DOM.lastChild(element)`::
+Find First or Last Child, skipping white space.
 
 ##	Others
 
@@ -175,19 +194,13 @@ Gets the current scroll position of the window as an object: `{left,top}`.
 `DOM.boundingRect(element[,documentRelative])`::
 Gets box information about the element as an object:
 
-[width="50em",frame="topbot",options="header",cols="m,2m"]
+[width="80em",frame="topbot",options="header",cols="m,m"]
 |=======
-| property   | description
-| x          | synonym for left
-| y          | synonym for top
-| width      |
-| height     |
-| left       |
-| top        |
-| right      |
-| bottom     |
-| scrollLeft | the window scroll left
-| scrollTop  | the window scroll top
+| properties				| description
+| x, y						| synonym for left & top
+| width, height				| dimensions of the box
+| left, top, right, bottom	| position of the box
+| scrollLeft, scrollTop		| the window scroll amount
 |=======
 
 

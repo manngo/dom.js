@@ -145,7 +145,7 @@
 
 			get: function(url,callback,query) {
 				var xhr=new XMLHttpRequest();
-				if(query) url+='?'+query;
+				if(query) url+='?'+query.replace(/^\?/,'');
 				xhr.open('get',url,true);
 				xhr.onload=function() {
 					if(callback) callback(this.responseText);
@@ -172,4 +172,42 @@
 				for(var i=0;i<elements.length; i++)
 					elements[i].addEventListener(listener,fn,capture);
 			},
+			
+		//	Get Siblings without white space nodes
+		//	See https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace_in_the_DOM
+			
+			isIgnorable: function(element) {
+				return element.nodeType==8 || element.nodeType==3 && !(/[^\t\n\r ]/.test(element.textContent));
+			},
+
+			previousSibling: function(element) {
+				while (element = element.previousSibling)
+					if(!this.isIgnorable(element)) return element;
+				return null;
+			},
+
+			nextSibling: function(element) {
+				while (element = element.nextSibling)
+					if(!this.isIgnorable(element)) return element;
+				return null;
+			},
+
+			lastChild: function(element) {
+				var child=element.lastChild;
+				while (child) {
+					if (!this.isIgnorable(child)) return child;
+					child = child.previousSibling;
+				}
+				return null;
+			},
+
+			firstChild: function(element) {
+				var child=element.firstChild;
+				while (child) {
+					if (!this.isIgnorable(child)) return child;
+					child = child.nextSibling;
+				}
+				return null;
+			},
+
 	};
