@@ -25,26 +25,35 @@
 				return nodeList ? div.childNodes : Array.prototype.slice.call(div.childNodes);
 			},
 
-
-		/*	Combined Version
-			================================================
-			insertBefore: function(newElement,element) {
-				if(newElement instanceof Element) element.parentNode.insertBefore(newElement,element);
-				else if(typeof newElement == 'string') element.insertAdjacentHTML('beforebegin', newElement);
+		//	Combined Version: Add element or HTML to or around another
+			prefix: function(data,element) {
+				if(newElement instanceof Element) element.parentNode.insertBefore(data,element);
+				else if(typeof newElement == 'string') element.insertAdjacentHTML('beforebegin', data);
 			},
-			================================================ */
+			prepend: function(data,element) {
+				if(newElement instanceof Element) element.insertBefore(data,element.childNodes[0]);
+				else if(typeof newElement == 'string') element.insertAdjacentHTML('afterbegin', data);
+			},
+			append: function(data,element) {
+				if(newElement instanceof Element) element.appendChild(data);
+				else if(typeof newElement == 'string') element.insertAdjacentHTML('beforeend', data);
+			},
+			affix: function(data,element) {
+				if(newElement instanceof Element) element.parentNode.insertBefore(data, element.nextSibling);
+				else if(typeof newElement == 'string') element.insertAdjacentHTML('afterend', data);
+			},
 
 		//	Add element to or around another
-			prefix: function(newElement,element) {
+			prefixElement: function(newElement,element) {
 				element.parentNode.insertBefore(newElement,element);
 			},
-			prepend: function(newElement,element) {
+			prependElement: function(newElement,element) {
 				element.insertBefore(newElement,element.childNodes[0]);
 			},
-			append: function(newElement,element) {
+			appendElement: function(newElement,element) {
 				element.appendChild(newElement);
 			},
-			affix: function(newElement,element) {
+			affixElement: function(newElement,element) {
 				element.parentNode.insertBefore(newElement, element.nextSibling);
 			},
 
