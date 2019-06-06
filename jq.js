@@ -28,16 +28,16 @@
 				Array.prototype.forEach.call(this,callback,thisArg);
 			};
 
-	var DOM={
+	var jq={
 		//	Returns an element or true array of elements
 			select: function(selector) {
 				return document.querySelector(selector);
 			},
-			selectAll: function(selector,nodeList) {
+			selectAll: function(selector) {
 				var nodes=document.querySelectorAll(selector);
-				return nodeList ?  nodes : Array.prototype.slice.call(nodes);
+				return Array.prototype.slice.call(nodes);
 			},
-		//	Add to Collection
+		//	$target.add(source)	jq.add(target,source)
 			add: function(target,source) {
 				return Array.push.apply(target,source);
 			},
@@ -131,12 +131,15 @@
 				wrapper.appendChild(element);
 				return wrapper;
 			},
-
 			wrapAll: function(elements, wrapper) {
 				elements[0].parentNode.insertBefore(wrapper, elements[0]);
 				for(var i=0;i<elements.length;i++) wrapper.appendChild(elements[i]);
 				return wrapper;
 			},
+			wrapInner: function(element,wrapper) {
+				while(var child=element.firstChild) wrapper.appendChild(child);
+				element.appendChild(wrapper);
+			}
 			unwrap: function(element,totally) {
 				var parent=element.parentNode;
 				parent.parentNode.insertBefore(element,parent);
@@ -163,6 +166,7 @@
 		//	Bounding Rectangle
 
 			boundingRect: function(element,documentRelative) {
+				var width, height, left, top, right, bottom;
 				var windowScroll, scroll, border, margin;
 				var rect=element.getBoundingClientRect();
 
@@ -171,12 +175,12 @@
 					top: window.pageYOffset || document.documentElement.scrollTop
 				};
 
-				var left=rect.left-documentRelative?windowScroll.left:0;
-				var top=rect.top-documentRelative?windowScroll.top:0;
-				var right=rect.right;
-				var bottom=rect.bottom;
-				var width=rect.right-rect.left;
-				var height=rect.bottom-rect.top;
+				left=rect.left-documentRelative?scroll.left:0;
+				top=rect.top-documentRelative?scroll.top:0;
+				right=rect.right;
+				bottom=rect.bottom;
+				width=rect.right-rect.left;
+				height=rect.bottom-rect.top;
 
 				rect={
 					'x':			left,

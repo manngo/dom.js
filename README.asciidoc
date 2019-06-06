@@ -15,17 +15,23 @@ A description of the routines follows.
 | `DOM.element(html)`				| Create Element from HTML
 | `DOM.elements(html[,nodeList])`	| Create Elements from HTML as array or nodeList
 
-2+| *Create Elements*
-| `DOM.prefix(newElement,element)`	| Insert newElement before element
-| `DOM.prepend(newElement,element)`	| Insert newElement inside element at beginning
-| `DOM.append(newElement,element)`	| Insert newElement inside element at end
-| `DOM.affix(newElement,element)`	| Insert newElement after element
-
 2+| *Insert Elements*
-| `DOM.prefixHTML(html,element)`	| Insert newElement before element
+| `DOM.beforeElement(newElement,element)`	| Insert newElement before element
+| `DOM.prependElement(newElement,element)`	| Insert newElement inside element at beginning
+| `DOM.appendElement(newElement,element)`	| Insert newElement inside element at end
+| `DOM.afterElement(newElement,element)`	| Insert newElement after element
+
+2+| *Insert Elements from HTML*
+| `DOM.beforeHTML(html,element)`	| Insert newElement before element
 | `DOM.prependHTML(html,element)`	| Insert newElement inside element at beginning
 | `DOM.appendHTML(html,element)`	| Insert newElement inside element at end
-| `DOM.affixHTML(html,element)`		| Insert newElement after element
+| `DOM.afterHTML(html,element)`		| Insert newElement after element
+
+2+| *Combination of Above*
+| `DOM.before(newElement,element)`	| Insert newElement before element
+| `DOM.prepend(newElement,element)`	| Insert newElement inside element at beginning
+| `DOM.append(newElement,element)`	| Insert newElement inside element at end
+| `DOM.after(newElement,element)`	| Insert newElement after element
 
 2+| *Toggle Attrbute*
 | `DOM.toggleAttribute(element,attribute[,value])`	| Toggle an element’s attribute.
@@ -85,18 +91,31 @@ image::insert.png[Insert Element]
 
 ### Insert Existing Element
 
-`DOM.prefix(newElement,element)`::
+`DOM.beforeElement(newElement,element)`::
 Insert newElement before element
-`DOM.prepend(newElement,element)`::
+`DOM.prependElement(newElement,element)`::
 Insert newElement inside element at beginning
-`DOM.append(newElement,element)`::
+`DOM.appendElement(newElement,element)`::
 Insert newElement inside element at end
-`DOM.affix(newElement,element)`::
+`DOM.afterElement(newElement,element)`::
 Insert newElement after element
 
 ### Insert Element from HTML
 
 The following create an element from an html string. Otherwise they do the same as above.
+
+`DOM.beforeHTML(html,element)`::
+Insert newElement before element
+`DOM.prependHTML(html,element)`::
+Insert newElement inside element at beginning
+`DOM.appendHTML(html,element)`::
+Insert newElement inside element at end
+`DOM.afterHTML(html,element)`::
+Insert newElement after element
+
+### Combination of Above
+
+The following insert an element or create an element from an html string. Otherwise they do the same as above.
 
 `DOM.prefixHTML(html,element)`::
 Insert newElement before element
@@ -174,7 +193,16 @@ The `fn` parameter is the event listener function, and is required. The `capture
 
 ##	Siblings
 
-Some Browsers, notably Mozilla, include white spaces between elements in the DOM tree. This is a set of functions which will skip these white space nodes.
+Some Browsers, notably Mozilla, include white spaces or comments between elements in the DOM tree.
+
+[NOTE]
+.Alternative Methods
+====
+Modern Browsers include alternative functions designed to skip text nodes.
+
+They are the `.previousElementSibling`, `.nextElementSibling`, `.firstElementChild` and `.lastElementChild` properties.
+====
+This is a set of functions which will skip white space or comment nodes only.
 
 You can safely use then for all browsers.
 
