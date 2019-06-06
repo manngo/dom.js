@@ -12,28 +12,32 @@ A description of the routines follows.
 | Description
 
 2+| *Select Elements*
+| `DOM.select(selector)`				| Select a single element using `selector`
+| `DOM.selectAll(selector[,nodeList])`	| Select a collection of Elements as array or nodeList
+
+2+| *Create Elements*
 | `DOM.element(html)`				| Create Element from HTML
 | `DOM.elements(html[,nodeList])`	| Create Elements from HTML as array or nodeList
 
 2+| *Insert Elements*
-| `DOM.beforeElement(newElement,element)`	| Insert newElement before element
-| `DOM.prependElement(newElement,element)`	| Insert newElement inside element at beginning
-| `DOM.appendElement(newElement,element)`	| Insert newElement inside element at end
-| `DOM.afterElement(newElement,element)`	| Insert newElement after element
-
-2+| *Insert Elements from HTML*
-| `DOM.beforeHTML(html,element)`	| Insert newElement before element
-| `DOM.prependHTML(html,element)`	| Insert newElement inside element at beginning
-| `DOM.appendHTML(html,element)`	| Insert newElement inside element at end
-| `DOM.afterHTML(html,element)`		| Insert newElement after element
-
-2+| *Combination of Above*
-| `DOM.before(newElement,element)`	| Insert newElement before element
+| `DOM.prefix(newElement,element)`	| Insert newElement before element
 | `DOM.prepend(newElement,element)`	| Insert newElement inside element at beginning
 | `DOM.append(newElement,element)`	| Insert newElement inside element at end
-| `DOM.after(newElement,element)`	| Insert newElement after element
+| `DOM.affix(newElement,element)`	| Insert newElement after element
 
-2+| *Toggle Attrbute*
+2+| *Insert Elements from HTML*
+| `DOM.prefixHTML(html,element)`	| Insert new element from HTML before element
+| `DOM.prependHTML(html,element)`	| Insert new element from HTML inside element at beginning
+| `DOM.appendHTML(html,element)`	| Insert new element from HTML inside element at end
+| `DOM.affixHTML(html,element)`		| Insert new element from HTML after element
+
+2+| *Combined Insert Elements or HTML*
+| `DOM.prefix(data,element)`	| Insert element or HTML before element
+| `DOM.prepend(data,element)`	| Insert element or HTML inside element at beginning
+| `DOM.append(data,element)`	| Insert element or HTML inside element at end
+| `DOM.affix(data,element)`		| Insert element or HTML after element
+
+2+| *Toggle Attribute*
 | `DOM.toggleAttribute(element,attribute[,value])`	| Toggle an element’s attribute.
 | `DOM.radio(elements,attribute[,allOff])`			| Add a `click` listener to toggle then elements’ attribute.
 
@@ -81,7 +85,9 @@ By default, the result is an *Array* of elements. The optional second parameter 
 
 ## Insert Elements
 
-There are eight routines which will place an element somewhere in the DOM. Four of them will place Element objects (such as those created or selected above), while four of them will place an element generated from an HTML string.
+There are 12 routines which will place an element somewhere in the DOM. Four of them will place Element objects (such as those created or selected above), while four of them will place an element generated from an HTML string.
+
+There are also four routines which are a combination of the above. Technically, they are less efficient, since they need to decide which. On the other hand, they are more convenient.
 
 There are four positions to insert your new element. `insertBefore` and `insertAfter` place the element _outside_, immediately before after  the original element. `prepend` and `append` place the new element _inside_, at the beginning or the end of the content of the original element.
 
@@ -126,7 +132,21 @@ Insert newElement inside element at end
 `DOM.affixHTML(html,element)`::
 Insert newElement after element
 
-## Toggle Attrbute
+### Insert Element or HTML
+
+The following are a combination of the above. You can use either an element or an HTML string.
+
+`DOM.prefix(data,element)`::
+Insert newElement before element
+`DOM.prepend(data,element)`::
+Insert newElement inside element at beginning
+`DOM.append(data,element)`::
+Insert newElement inside element at end
+`DOM.affix(data,element)`::
+Insert newElement after element
+
+
+## Toggle Attribute
 
 This will toggle an element’s attribute by adding or removing it. Optionally, you can set the value of the attribute to something other than `true`.
 
@@ -175,7 +195,7 @@ The `data` parameter will get the `responseText` from the Ajax call.
 
 ### `query`
 
-This is a query string _without_ the leading quesion mark (`?`).
+This is a query string _without_ the leading question mark (`?`).
 
 `DOM.loadHTML(element,url[,query]])`::
 Makes an Ajax call to `url`, with an optional query string, and loads the result into the `element`; the result is interpreted as *HTML*.

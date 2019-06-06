@@ -54,18 +54,36 @@
 				return nodeList ? div.childNodes : Array.prototype.slice.call(div.childNodes);
 			},
 
+		//	Combined Version: Add element or HTML to or around another
+			prefix: function(data,element) {
+				if(newElement instanceof Element) element.parentNode.insertBefore(data,element);
+				else if(typeof newElement == 'string') element.insertAdjacentHTML('beforebegin', data);
+			},
+			prepend: function(data,element) {
+				if(newElement instanceof Element) element.insertBefore(data,element.childNodes[0]);
+				else if(typeof newElement == 'string') element.insertAdjacentHTML('afterbegin', data);
+			},
+			append: function(data,element) {
+				if(newElement instanceof Element) element.appendChild(data);
+				else if(typeof newElement == 'string') element.insertAdjacentHTML('beforeend', data);
+			},
+			affix: function(data,element) {
+				if(newElement instanceof Element) element.parentNode.insertBefore(data, element.nextSibling);
+				else if(typeof newElement == 'string') element.insertAdjacentHTML('afterend', data);
+			},
+
 		//	Add element to or around another
-			beforeElement: function(newElement,element) {
-				element.insertAdjacentElement('beforebegin',newElement);
+			prefixElement: function(newElement,element) {
+				element.parentNode.insertBefore(newElement,element);
 			},
 			prependElement: function(newElement,element) {
-				element.insertAdjacentElement('afterbegin',newElement);
+				element.insertBefore(newElement,element.childNodes[0]);
 			},
 			appendElement: function(newElement,element) {
-				element.insertAdjacentElement('beforeend',newElement);
+				element.appendChild(newElement);
 			},
-			afterElement: function(newElement,element) {
-				element.insertAdjacentElement('afterend',newElement);
+			affixElement: function(newElement,element) {
+				element.parentNode.insertBefore(newElement, element.nextSibling);
 			},
 
 		//	Add html to or around another element
